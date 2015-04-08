@@ -1,0 +1,151 @@
+﻿<Window x:Class="KuBob.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        AllowsTransparency="True" Background="Transparent" 
+        ShowInTaskbar="False" WindowStyle="None" Topmost="True"
+        Title="KuBob" Height="300" Width="570" Loaded="Window_Loaded" Closing="Window_Closing" KeyDown="Window_KeyDown">
+
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="{DynamicResource sColor}">
+        <Grid.Effect>
+            <DropShadowEffect x:Name="grideffectShadow" BlurRadius="10" ShadowDepth="1" Direction="270" Color="{DynamicResource cColor}" Opacity="0.5"/>
+        </Grid.Effect>
+
+        <Grid x:Name="gridMain" Margin="1" Width="550" Height="280" Background="White" MouseDown="gridMain_MouseDown" ClipToBounds="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="gridMenu" Background="Transparent">
+                <Grid Margin="0,0,100,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="buttonYestDay" 
+                            Width="30" Height="50" 
+                            Background="Transparent" Foreground="Transparent" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Click="buttonYestDay_Click">
+                        
+                        <Grid Background="Black" Width="11" Height="17" Opacity="0.6">
+                            <Grid.OpacityMask>
+                                <ImageBrush ImageSource="Resources/arrowleft.png"/>
+                            </Grid.OpacityMask>
+                        </Grid>
+                    </Button>
+
+                    <Button x:Name="buttonNextDay" 
+                            Grid.Column="2" Width="30" Height="50" 
+                            Background="Transparent" Foreground="Transparent" 
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Click="buttonNextDay_Click">
+                        <Grid Background="Black" Width="11" Height="17" Opacity="0.6">
+                            <Grid.OpacityMask>
+                                <ImageBrush ImageSource="Resources/arrowright.png"/>
+                            </Grid.OpacityMask>
+                        </Grid>
+                    </Button>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock x:Name="textMonth" Text="" FontFamily="Century Gothic" Foreground="LightGray" FontSize="35" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
+                        <TextBlock x:Name="textDay" Text="" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="35" Margin="5,0,0,0"/>
+                        <StackPanel Margin="7,0,0,3" VerticalAlignment="Bottom">
+                            <TextBlock x:Name="textWeekDay" Text="" FontFamily="Century Gothic" Foreground="Gray" FontSize="14" VerticalAlignment="Bottom" Margin="5,0,5,0" Opacity="0.7"/>
+                            <TextBlock x:Name="textYear" Text="" FontFamily="Century Gothic" Foreground="Gray" FontSize="16" VerticalAlignment="Bottom" Margin="5,0,5,0" Opacity="0.7"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <Button x:Name="buttonToday" Grid.Column="1" Background="Transparent" MouseDoubleClick="buttonToday_MouseDoubleClick"/>
+                    <!-- 
+                    <TextBlock x:Name="textMenu" Grid.Column="1" Text="JAN.11" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="24" VerticalAlignment="Center"/>
+                    -->
+                    <TextBlock x:Name="textTime" 
+                               Grid.Column="3" VerticalAlignment="Center" Margin="20,0,0,0"
+                               Text="" Opacity="0.7"
+                               FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="24"/>
+                </Grid>
+            </Grid>
+
+            <Grid x:Name="gridTitlebar" Grid.Row="0" Background="Transparent" Margin="450,0,0,0">
+                <Button x:Name="buttonSetting" 
+                        Width="34" Height="26" 
+                        Background="LightGreen" Foreground="WhiteSmoke" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="0,0,68,0" Style="{DynamicResource styleSystemButton}"
+                        Click="buttonSetting_Click">
+                    <Grid Background="Gray" Width="14" Height="13">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="Resources/19.png"/>
+                        </Grid.OpacityMask>
+                    </Grid>
+                </Button>
+                <Button x:Name="buttonMain" Visibility="Collapsed"
+                        Width="34" Height="26" 
+                        Background="LightGreen" Foreground="WhiteSmoke" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="0,0,68,0" Style="{DynamicResource styleSystemButton}"
+                        Click="buttonMain_Click">
+                    <Grid Background="Gray" Width="14" Height="13">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="Resources/35.png"/>
+                        </Grid.OpacityMask>
+                    </Grid>
+                </Button>
+                <Button x:Name="buttonMinimize" 
+                        Width="34" Height="26" 
+                        Background="CornflowerBlue" Foreground="WhiteSmoke" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Margin="0,0,34,0" Style="{DynamicResource styleSystemButton}"
+                        Click="buttonMinimize_Click">
+                    <Grid Background="LightGray" Width="34" Height="26">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="Resources/iconMini.png"/>
+                        </Grid.OpacityMask>
+                    </Grid>
+                </Button>
+                <Button x:Name="buttonClose" 
+                        Width="34" Height="26" 
+                        Background="Firebrick" Foreground="Crimson" 
+                        HorizontalAlignment="Right" VerticalAlignment="Top" 
+                        Style="{DynamicResource styleSystemButton}"
+                        Click="buttonClose_Click">
+                    <Grid Background="LightGray" Width="34" Height="26">
+                        <Grid.OpacityMask>
+                            <ImageBrush ImageSource="Resources/iconClose.png"/>
+                        </Grid.OpacityMask>
+                    </Grid>
+                </Button>
+            </Grid>
+
+            <StackPanel x:Name="stackContent" Grid.Row="1">
+                <StackPanel x:Name="stackMeal1" Visibility="Collapsed">
+                    <TextBlock Text="/Breakfast" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="21" Margin="15,0,0,0"/>
+                    <TextBlock x:Name="textMeal1" Margin="25,5,0,15" FontSize="14" LineHeight="25" TextTrimming="CharacterEllipsis" Width="500">
+                        식빵  우유(D)  오징어링  타르타르D  스팸구이  그린샐러드  드레싱  바나나<LineBreak/>얼갈이국  잡곡밥  유자청제육볶음  도토리묵양념장  들깨소스야채무침  깍두기
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="stackMeal2" Visibility="Collapsed">
+                    <TextBlock Text="/Lunch" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="21" Margin="15,0,0,0"/>
+                    <TextBlock x:Name="textMeal2" Text="asd" Margin="25,5,0,15" FontSize="14" TextTrimming="CharacterEllipsis" Width="500"/>
+                </StackPanel>
+                <StackPanel x:Name="stackMeal3" Visibility="Collapsed">
+                    <TextBlock Text="/Dinner" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="21" Margin="15,0,0,0"/>
+                    <TextBlock x:Name="textMeal3" Text="식빵  우유(D)  오징어링  타르타르D  스팸구이  그린샐러드  드레싱  바나나" Margin="25,5,0,15" FontSize="14" TextTrimming="CharacterEllipsis" Width="500"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <Grid x:Name="gridSettingMenu" Opacity="0" Margin="100,0,180,0" IsHitTestVisible="False">
+                <TextBlock Text="Settings" FontFamily="Century Gothic" Foreground="{DynamicResource sColor}" FontSize="25" Margin="15,0,0,0" VerticalAlignment="Center"/>
+            </Grid>
+            
+            <StackPanel x:Name="stackSetting" Grid.Row="1" Opacity="0" Margin="100,0,0,0">
+                <CheckBox x:Name="checkNoti" Content="알림 표시" Margin="5" IsChecked="True" Checked="SettingsChanged" Unchecked="SettingsChanged"/>
+                <CheckBox x:Name="checkTime" Content="시간 표시" Margin="5" IsChecked="True" Checked="SettingsChanged" Unchecked="SettingsChanged"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
